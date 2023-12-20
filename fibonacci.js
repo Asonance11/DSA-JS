@@ -1,22 +1,25 @@
-// function fib(n) {
-// 	if (n <= 1) {
-// 		return n;
-// 	} else {
-// 		return fib(n - 1) + fib(n - 2);
-// 	}
-// }
-
-// optimized fib
-
 function fib(n) {
-	let a = 1;
-	let b = 1;
-	for (let i = 3; i <= n; i++) {
-		let c = a + b;
-		a = b;
-		b = c;
+	sequence = [0, 1];
+
+	while (sequence.length < n) {
+		sequence.push(
+			sequence[sequence.length - 1] + sequence[sequence.length - 2]
+		);
 	}
-	return b;
+
+	return sequence.join(', ');
 }
 
-console.log(fib(5));
+function fibsRec(n) {
+	if (n <= 2) {
+		return [0, 1].slice(0, n);
+	} else {
+		let sequence = fibsRec(n - 1);
+		sequence.push(
+			sequence[sequence.length - 1] + sequence[sequence.length - 2]
+		);
+		return sequence;
+	}
+}
+
+console.log(fibsRec(8));
